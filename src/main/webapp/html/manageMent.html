@@ -1,10 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>ManageMent</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 Bootstrap -->
+    <link href="../common/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-ManageMent
+<div class="container">
+    <h1>Mybatis代码自动生成器</h1>
+    <!--导航栏-->
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">代码生成器</a></li>
+                <li><a href="#">模板文件管理</a></li>
+                <li><a href="#">项目信息维护</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked" id="sidebar">
+            <li id="menuXml" class="active"><a href='#'>原生Xml</a></li>
+            <li id="menuMybatisPlus"><a href='#'>Mybatis Plus</a></li>
+            <li id="menuCustomer"><a href='#'>自定义设置</a></li>
+        </ul>
+    </div>
+
+    <div id="content" class="row-fluid">
+        <h1>
+            初始化空内容
+        </h1>
+    </div>
+</div>
+
+
+<!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+<script src="../common/js/jquery-3.3.1.min.js"></script>
+<!-- 包括所有已编译的插件 -->
+<script src="../common/js/bootstrap.min.js"></script>
+
+<script>
+    $(function () {
+        $('#menuXml').click(function () {
+            $("#sidebar > li").removeClass("active");
+            $(this).addClass("active");
+            var menuUrl = "testContent.html";
+            $("#content").load(menuUrl);
+        });
+        $('#menuMybatisPlus').click(function () {
+            $("#sidebar > li").removeClass("active");
+            $(this).addClass("active");
+            var menuUrl = "testContent2.html";
+            $("#content").load(menuUrl);
+        });
+        $('#menuCustomer').click(function () {
+            $("#sidebar > li").removeClass("active");
+            $(this).addClass("active");
+            var menuUrl = "testContent3.html";
+            $("#content").load(menuUrl);
+        });
+
+        $("#sidebar > li").each(function (i) {
+            if ($(this).hasClass("active")){
+                $(this).click();
+                return;
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
