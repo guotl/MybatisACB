@@ -8,12 +8,25 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <base href="<%=basePath%>">
     <title>Insert title here</title>
 </head>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript">
+</script>
 <body>
 
+<h2>Index.jsp</h2>
+<p>
+    缺少登陆之后跳转的操作
+</p>
+<p>
+    后续补充登陆和注册功能
+</p>
 
-
-<h2>Hello World!</h2>
+<script type="text/javascript">
+    $(function () {
+        window.location.href = "<%=basePath%>html/manageMent.html";
+    });
+</script>
 </body>
 </html>
