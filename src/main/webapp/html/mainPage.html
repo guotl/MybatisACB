@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ManageMent</title>
+    <link href="../common/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../common/css/justified-nav.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="masthead">
+        <h3 class="text-muted">代码自动构建</h3>
+        <nav>
+            <ul id="mainPageNavBar" class="nav nav-justified">
+                <li class="active" data-menu_url="homePage.html"><a href="#">Home</a></li>
+                <li data-menu_url="manageMent.html"><a href="#">代码生成</a></li>
+                <li data-menu_url="testContent3.html"><a href="#">项目信息管理</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="mainPageContent"></div>
+
+    <!-- Site footer -->
+    <footer class="footer">
+        <p>&copy; 2018 Company, Guotl.</p>
+    </footer>
+
+</div> <!-- /container -->
+
+<script src="../common/js/jquery-3.3.1.min.js"></script>
+<script src="../common/js/bootstrap.min.js"></script>
+<script src="../common/js/navBar.js"></script>
+<script>
+    $(function () {
+        initNavBar('mainPageNavBar','mainPageContent');
+    });
+</script>
+
+</body>
+</html>

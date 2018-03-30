@@ -25,7 +25,7 @@
 
 <script type="text/javascript">
     $(function () {
-        window.location.href = "<%=basePath%>html/manageMent.html";
+        window.location.href = "<%=basePath%>html/login.html";
     });
 </script>
 </body>
