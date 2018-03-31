@@ -1,25 +1,27 @@
-<div class="" >
+<div class="container-fluid">
+    <div class="row " style="">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-pills nav-stacked" id="manageMentSidebar" >
+                <li class="active" data-menu_url="testContent.html"><a href='#'>原生Xml</a></li>
+                <li data-menu_url="testContent2.html"><a href='#'>Mybatis Plus</a></li>
+                <li data-menu_url="testContent3.html"><a href='#'>自定义设置</a></li>
+            </ul>
+        </div>
 
-    <div class="col-md-3">
-        <ul class="nav nav-pills nav-stacked" id="manageMentSidebar">
-            <li class="active" data-menu_url="testContent.html"><a href='#'>原生Xml</a></li>
-            <li data-menu_url="testContent2.html"><a href='#'>Mybatis Plus</a></li>
-            <li data-menu_url="testContent3.html"><a href='#'>自定义设置</a></li>
-        </ul>
-    </div>
+        <div class="col-sm-9 col-md-10  main pre-scrollable" style="max-height: 500px;">
+            <div id="manageMentContent" class="" >
+                <h1>
+                    初始化空内容
+                </h1>
+            </div>
+        </div>
 
-    <div id="manageMentContent" class="row-fluid" style="height: 500px;">
-        <h1>
-            初始化空内容
-        </h1>
     </div>
 </div>
+
 
 <script>
     $(function () {
         initNavBar('manageMentSidebar','manageMentContent');
     });
 </script>
-
-</body>
-</html>
