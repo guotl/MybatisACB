@@ -15,9 +15,15 @@ function initNavBar(ulId,divCountentId) {
             defaultMenu = this;
         }
         $(this).click(function () {
-            $('#'+ulId+' > li').removeClass('active');
-            $(this).addClass('active');
-            $('#'+divCountentId).load($(this).data('menu_url'));
+            if (!$(this).hasClass('active')){
+                $(this).addClass('active');
+                $('#'+ulId+' > li').not(this).removeClass('active');
+            }
+            $('#'+ulId+' > li:not(.active)').data('menu_loaded','false');//将其他菜单的已加载标识重置
+            if ($(this).data('menu_loaded') != 'true'){
+                $(this).data('menu_loaded','true');
+                $('#'+divCountentId).load($(this).data('menu_url'));
+            }
         });
     });
     if (defaultMenu != null){
