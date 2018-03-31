@@ -3,7 +3,15 @@
 <mapper namespace="cn.guotl.codeBuilder.dao.TemplateInfoDao">
 
     <select id="findOneForTest" resultType="cn.guotl.codeBuilder.model.TemplateInfo" >
-        SELECT * FROM template_info limit 1;
+        SELECT * FROM template_info limit 1
+    </select>
+
+    <select id="queryPage" resultType="cn.guotl.codeBuilder.model.TemplateInfo" >
+        SELECT * FROM template_info limit ${page.offset} , ${page.pageSize}
+    </select>
+
+    <select id="count" parameterType="cn.guotl.codeBuilder.model.TemplateInfo" resultType="java.lang.Integer" >
+        SELECT count(1) FROM template_info
     </select>
 
 </mapper>

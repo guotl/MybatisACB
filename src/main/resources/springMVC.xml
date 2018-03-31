@@ -55,7 +55,6 @@
     <!--<mvc:resources location="/" mapping="/**/*.html" order="0" />-->
     <mvc:resources location="/html/" mapping="/html/**" order="0"/>
     <mvc:resources location="/images/" mapping="/images/**" order="0"/>
-    <mvc:resources location="/maps/" mapping="/maps/**" order="0"/>
     <mvc:resources location="/common/" mapping="/common/**" order="0"/>
     <mvc:resources location="/js/" mapping="/js/**" order="0"/>
     <mvc:resources location="/css/" mapping="/css/**" order="0"/>

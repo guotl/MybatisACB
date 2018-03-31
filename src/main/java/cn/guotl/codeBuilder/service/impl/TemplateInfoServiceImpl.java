@@ -1,24 +1,27 @@
 package cn.guotl.codeBuilder.service.impl;
 
 import cn.guotl.codeBuilder.dao.TemplateInfoDao;
+import cn.guotl.codeBuilder.model.TemplateInfo;
 import cn.guotl.codeBuilder.service.TemplateInfoService;
+import cn.guotl.common.vo.PageParameterVo;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by guotianlin on 2018/3/30.
  */
+@Transactional
 @Service("templateInfoService")
 public class TemplateInfoServiceImpl implements TemplateInfoService {
 
@@ -98,6 +101,13 @@ public class TemplateInfoServiceImpl implements TemplateInfoService {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public PageParameterVo queryPage(PageParameterVo page, TemplateInfo entity) {
+        page.setTotal(this.templateInfoDao.count(entity));
+        page.setRowDatas(this.templateInfoDao.queryPage(page,entity));
+        return page;
     }
 
 

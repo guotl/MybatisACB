@@ -1,6 +1,7 @@
 package cn.guotl.codeBuilder.model;
 
 import java.io.Serializable;
+import java.sql.Blob;
 
 /**
  * Created by guotianlin on 2018/3/30.
@@ -12,9 +13,15 @@ public class TemplateInfo implements Serializable{
 
     private String name;
 
-    private byte[] content;
+    private Blob content;
 
     private String remark;
+
+    private String isSystem;
+
+    private String userId;
+
+    private String isDeleted;
 
     public String getId() {
         return id;
@@ -32,6 +39,14 @@ public class TemplateInfo implements Serializable{
         this.name = name;
     }
 
+    public Blob getContent() {
+        return content;
+    }
+
+    public void setContent(Blob content) {
+        this.content = content;
+    }
+
     public String getRemark() {
         return remark;
     }
@@ -40,11 +55,27 @@ public class TemplateInfo implements Serializable{
         this.remark = remark;
     }
 
-    public byte[] getContent() {
-        return content;
+    public String getIsSystem() {
+        return isSystem;
     }
 
-    public void setContent(byte[] content) {
-        this.content = content;
+    public void setIsSystem(String isSystem) {
+        this.isSystem = isSystem;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(String isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }
