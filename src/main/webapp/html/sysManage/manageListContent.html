@@ -1,0 +1,148 @@
+<!--基础模板管理-->
+<link href="../common/css/bootstrap-table.min.css" rel="stylesheet">
+<div class="panel panel-primary" style="margin-top: 20px;margin-bottom: 0px;">
+    <div class="panel-heading">
+        查询内容
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <from class="form-inline">
+                <div class="form-group">
+                    <label for="exampleInputName2">一二三四</label>
+                    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName3">一二三四</label>
+                    <input type="text" class="form-control" id="exampleInputName3" placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName6">一二三四</label>
+                    <input type="text" class="form-control" id="exampleInputName6" placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName7">一二三四</label>
+                    <input type="text" class="form-control" id="exampleInputName7" placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName4">一二三四</label>
+                    <input type="text" class="form-control" id="exampleInputName4" placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName5">一二三四</label>
+                    <input type="text" class="form-control" id="exampleInputName5" placeholder="Jane Doe">
+                </div>
+            </from>
+        </div>
+    </div>
+
+</div>
+
+<div id="toolbar" class="btn-group">
+    <button id="btn_add" type="button" class="btn btn-default btn-xs" onclick="showTemplateCreationWindow()">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+    </button>
+</div>
+
+<table id="tabeBaseTemplateManage"></table>
+<script>
+    $(function () {
+        $("#tabeBaseTemplateManage").bootstrapTable({ // 对应table标签的id
+            url: "../templateInfo/manageList.json", // 获取表格数据的url
+            method: 'post',
+            contentType: 'application/json',
+            dataType: 'json',
+            cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+            toolbar:'#toolbar',//工具栏
+            showRefresh: true,//显示刷新按钮
+            showColumns: true,//显示列选择
+            striped: true,  //表格显示条纹，默认为false
+            pagination: true, // 在表格底部显示分页组件，默认false
+            pageList: [10, 25, 50], // 设置页面可以显示的数据条数
+            pageSize: 10, // 页面数据条数
+            pageNumber: 1, // 首页页码
+            sidePagination: 'server', // 设置为服务器端分页
+            dataField: 'rowDatas',//后端分页时需返回含有total：总记录数,这个键值好像是固定的 rows： 记录集合 键值可以修改  dataField
+            uniqueId: "id", //每一行的唯一标识，一般为主键列
+            queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+                return {
+                    pageSize: params.limit, // 每页要显示的数据条数
+                    offset: params.offset,// 每页显示数据的开始行号
+                    page: (params.offset / params.limit) + 1, // 页码
+                    sort: params.sort, // 要排序的字段
+                    sortOrder: params.order // 排序规则
+//                    dataId: $("#dataId").val() // 额外添加的参数
+                }
+            },
+            sortName: 'id', // 要排序的字段
+            sortOrder: 'desc', // 排序规则
+            columns: [
+                {
+                    field: 'name', // 返回json数据中的name
+                    title: '名称', // 表格表头显示文字
+                    align: 'center', // 左右居中
+                    valign: 'middle' // 上下居中
+                }, {
+                    field: 'is_deleted',
+                    title: '是否删除',
+                    align: 'center',
+                    valign: 'middle',
+                    formatter: function (value, row, index) { // 单元格格式化函数
+                        var text = '-';
+                        if (value == '1') {
+                            text = "是";
+                        } else {
+                            text = "否";
+                        }
+                        return text;
+                    }
+                }, {
+                    title: "操作",
+                    align: 'center',
+                    valign: 'middle',
+                    width: 160, // 定义列的宽度，单位为像素px
+                    formatter: function (value, row, index) {
+                        return '<button class="btn btn-primary btn-sm" onclick="del(\'' + row.stdId + '\')">删除</button>';
+                    }
+                }
+            ],
+            onLoadSuccess: function () {  //加载成功时执行
+                console.info("加载成功");
+            },
+            onLoadError: function () {  //加载失败时执行
+                console.info("加载数据失败");
+            }
+
+        })
+    });
+
+    function showTemplateCreationWindow() {
+        $('#baseTemplateManageContnent').load('templateInfo/create.html');
+        $('#olPathInfo').show();
+        $('#liPathTemplateCreate').show();
+        $('#divCreateTemplateBtns').show();
+
+        initBtnEvent();
+    }
+
+    function createTmeplate() {
+
+    }
+
+    function initBtnEvent() {
+        $('#save').click(function () {
+
+        });
+
+        $('#cancel').click(function () {
+            $('#baseTemplateManageContnent').load('sysManage/manageListContent.html');
+            $('#olPathInfo').hide();
+            $('#liPathTemplateCreate').hide();
+            $('#divCreateTemplateBtns').hide();
+        });
+    }
+
+</script>
+
+<script src="../common/js/bootstrap-table.js"></script>
+<script src="../common/js/bootstrap-table-zh-CN.js"></script>
