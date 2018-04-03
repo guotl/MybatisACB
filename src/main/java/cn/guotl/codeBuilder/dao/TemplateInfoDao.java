@@ -19,4 +19,6 @@ public interface TemplateInfoDao {
 
     public int count(TemplateInfo entity);
 
+    public void create(TemplateInfo entity);
+
 }

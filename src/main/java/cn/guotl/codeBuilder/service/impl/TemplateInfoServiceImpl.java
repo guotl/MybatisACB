@@ -3,11 +3,14 @@ package cn.guotl.codeBuilder.service.impl;
 import cn.guotl.codeBuilder.dao.TemplateInfoDao;
 import cn.guotl.codeBuilder.model.TemplateInfo;
 import cn.guotl.codeBuilder.service.TemplateInfoService;
+import cn.guotl.codeBuilder.vo.TemplateInfoVo;
+import cn.guotl.common.utils.UUID_Utils;
 import cn.guotl.common.vo.PageParameterVo;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.sql.Blob;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by guotianlin on 2018/3/30.
@@ -108,6 +113,21 @@ public class TemplateInfoServiceImpl implements TemplateInfoService {
         page.setTotal(this.templateInfoDao.count(entity));
         page.setRowDatas(this.templateInfoDao.queryPage(page,entity));
         return page;
+    }
+
+    @Override
+    public TemplateInfo create(TemplateInfoVo templateInfoVo) {
+        if (templateInfoVo == null){
+            return null;
+        }
+        TemplateInfo entity = new TemplateInfo();
+        BeanUtils.copyProperties(templateInfoVo,entity);
+        entity.setId(UUID_Utils.create());
+        entity.setContent(templateInfoVo.getContent_str().getBytes());
+        entity.setIs_system("1");
+        entity.setIs_deleted("0");
+        this.templateInfoDao.create(entity);
+        return entity;
     }
 
 

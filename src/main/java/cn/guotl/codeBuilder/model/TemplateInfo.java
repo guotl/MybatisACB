@@ -13,15 +13,19 @@ public class TemplateInfo implements Serializable{
 
     private String name;
 
-    private Blob content;
+    private byte[] content;
 
     private String remark;
 
-    private String isSystem;
+    private String type;
 
-    private String userId;
+    private String file_type;
 
-    private String isDeleted;
+    private String is_system;
+
+    private String user_id;
+
+    private String is_deleted;
 
     public String getId() {
         return id;
@@ -39,11 +43,11 @@ public class TemplateInfo implements Serializable{
         this.name = name;
     }
 
-    public Blob getContent() {
+    public byte[] getContent() {
         return content;
     }
 
-    public void setContent(Blob content) {
+    public void setContent(byte[] content) {
         this.content = content;
     }
 
@@ -55,27 +59,43 @@ public class TemplateInfo implements Serializable{
         this.remark = remark;
     }
 
-    public String getIsSystem() {
-        return isSystem;
+    public String getType() {
+        return type;
     }
 
-    public void setIsSystem(String isSystem) {
-        this.isSystem = isSystem;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getFile_type() {
+        return file_type;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setFile_type(String file_type) {
+        this.file_type = file_type;
     }
 
-    public String getIsDeleted() {
-        return isDeleted;
+    public String getIs_system() {
+        return is_system;
     }
 
-    public void setIsDeleted(String isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setIs_system(String is_system) {
+        this.is_system = is_system;
+    }
+
+    public String getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(String is_deleted) {
+        this.is_deleted = is_deleted;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 }

@@ -10,6 +10,33 @@
         SELECT * FROM template_info limit ${page.offset} , ${page.pageSize}
     </select>
 
+    <select id="create" resultType="cn.guotl.codeBuilder.model.TemplateInfo" >
+        INSERT INTO template_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="content != null">content,</if>
+            <if test="remark != null">remark,</if>
+            <if test="type != null">type,</if>
+            <if test="file_type != null">file_type,</if>
+            <if test="is_system != null">is_system,</if>
+            <if test="user_id != null">user_id,</if>
+            <if test="is_deleted != null">is_deleted,</if>
+        </trim>
+
+        <trim prefix=" VALUES (" suffix=")" suffixOverrides="," >
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+            <if test="content != null">#{content,jdbcType=BLOB},</if>
+            <if test="remark != null">#{remark,jdbcType=VARCHAR},</if>
+            <if test="type != null">#{type,jdbcType=VARCHAR},</if>
+            <if test="file_type != null">#{file_type,jdbcType=VARCHAR},</if>
+            <if test="is_system != null">#{is_system,jdbcType=VARCHAR},</if>
+            <if test="user_id != null">#{user_id,jdbcType=VARCHAR},</if>
+            <if test="is_deleted != null">#{is_deleted,jdbcType=VARCHAR},</if>
+        </trim>
+    </select>
+
     <select id="count" parameterType="cn.guotl.codeBuilder.model.TemplateInfo" resultType="java.lang.Integer" >
         SELECT count(1) FROM template_info
     </select>

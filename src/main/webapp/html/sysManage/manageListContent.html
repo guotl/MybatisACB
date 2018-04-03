@@ -38,15 +38,22 @@
 
 </div>
 
-<div id="toolbar" class="btn-group">
+<div id="toolbar" >
     <button id="btn_add" type="button" class="btn btn-default btn-xs" onclick="showTemplateCreationWindow()">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+    </button>
+    <button id="btn_upload" type="button" class="btn btn-default btn-xs" onclick="showTemplateCreationWindow()" style="margin-left: 5px;">
+        <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>上传模板
     </button>
 </div>
 
 <table id="tabeBaseTemplateManage"></table>
 <script>
     $(function () {
+        initTable();
+    });
+
+    function initTable() {
         $("#tabeBaseTemplateManage").bootstrapTable({ // 对应table标签的id
             url: "../templateInfo/manageList.json", // 获取表格数据的url
             method: 'post',
@@ -113,33 +120,14 @@
                 console.info("加载数据失败");
             }
 
-        })
-    });
+        });
+    }
 
     function showTemplateCreationWindow() {
         $('#baseTemplateManageContnent').load('templateInfo/create.html');
         $('#olPathInfo').show();
         $('#liPathTemplateCreate').show();
         $('#divCreateTemplateBtns').show();
-
-        initBtnEvent();
-    }
-
-    function createTmeplate() {
-
-    }
-
-    function initBtnEvent() {
-        $('#save').click(function () {
-
-        });
-
-        $('#cancel').click(function () {
-            $('#baseTemplateManageContnent').load('sysManage/manageListContent.html');
-            $('#olPathInfo').hide();
-            $('#liPathTemplateCreate').hide();
-            $('#divCreateTemplateBtns').hide();
-        });
     }
 
 </script>

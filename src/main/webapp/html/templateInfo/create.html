@@ -1,26 +1,141 @@
-<from class="form-inline">
+<!--新增模板 content-->
+
+<link href="../common/summernote/summernote.css" rel="stylesheet">
+
+<style>
+    code{
+        margin: 0 0 0 0;
+        min-width:200px;
+        min-height:200px;
+    }
+</style>
+
+<from class="form-inline" id="formTemplate">
     <div class="form-group">
-        <label for="exampleInputName2">一二三四</label>
-        <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+        <label for="name">模板名称</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
     </div>
     <div class="form-group">
-        <label for="exampleInputName3">一二三四</label>
-        <input type="text" class="form-control" id="exampleInputName3" placeholder="Jane Doe">
+        <label for="file_type">文件类型</label>
+        <select id="file_type" name="file_type" class="form-control" style="width:172px;">
+            <option value="0">java</option>
+            <option value="1">xml</option>
+            <option value="2">js</option>
+            <option value="3">html</option>
+            <option value="4">css</option>
+            <option value="5">jsp</option>
+        </select>
     </div>
+    <!--<div class="form-group">-->
+        <!--<label for="exampleInputName6">一二三四</label>-->
+        <!--<input type="text" class="form-control" id="exampleInputName6" placeholder="Jane Doe">-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<label for="exampleInputName7">一二三四</label>-->
+        <!--<input type="text" class="form-control" id="exampleInputName7" placeholder="Jane Doe">-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<label for="exampleInputName4">一二三四</label>-->
+        <!--<input type="text" class="form-control" id="exampleInputName4" placeholder="Jane Doe">-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<label for="exampleInputName5">一二三四</label>-->
+        <!--<input type="text" class="form-control" id="exampleInputName5" placeholder="Jane Doe">-->
+    <!--</div>-->
     <div class="form-group">
-        <label for="exampleInputName6">一二三四</label>
-        <input type="text" class="form-control" id="exampleInputName6" placeholder="Jane Doe">
+        <label for="remark">备注</label>
+        <textarea id="remark" name="remark" class="form-control " rows="3" style="width: 714px;"></textarea>
     </div>
-    <div class="form-group">
-        <label for="exampleInputName7">一二三四</label>
-        <input type="text" class="form-control" id="exampleInputName7" placeholder="Jane Doe">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputName4">一二三四</label>
-        <input type="text" class="form-control" id="exampleInputName4" placeholder="Jane Doe">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputName5">一二三四</label>
-        <input type="text" class="form-control" id="exampleInputName5" placeholder="Jane Doe">
-    </div>
+
+    <input type="hidden" id="content_str" name="content_str" >
+
 </from>
+
+<div id="divOnlineEdit" class="row" style="margin-top: 20px;">
+    <div class="col-md-12" style="">
+        <h5>模板内容</h5>
+        <div id="editor" >
+
+        </div>
+    </div>
+</div>
+
+<script src="../common/summernote/summernote.min.js"></script>
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#editor").summernote({
+            height: 400,
+            placeholder: '在此编辑模板内容...',
+            callbacks: {
+                onInit: function() {//加载之后，手动进入编码模式
+                    $(".btn-codeview").click();
+                    $('div .note-toolbar-wrapper').hide();
+                }
+            }
+        });
+        $("#editor").summernote('code','');
+
+        initBtnEvent();
+//        $("#editor").summernote('code'); //读取内容
+//        $("#editor").summernote('code','1 \r\b\b\b1 \n1 \t2 ');//加载内容
+    });
+
+    function initBtnEvent() {
+        $('#save').click(function () {
+            $('#content_str').val($("#editor").summernote('code'));
+
+            $.ajax({url: '../templateInfo/createSystemplate',
+                type: 'post',
+                dataType: 'json',
+                contentType:'application/json',
+                data:JSON.stringify({
+                    name : $('#name').val(),
+                    remark : $('#remark').val(),
+                    content_str : $('#content_str').val()
+                }),
+                success: function (data) {
+                    if (data.status == "ok") {
+                        $('.jsrz_main_check').html('您的申请已提交，我们将会在1-2个工作日内进行审核，请耐心等待!');
+                        $('#baseTemplateManageContnent').load('sysManage/manageListContent.html');
+                        $('#olPathInfo').hide();
+                        $('#liPathTemplateCreate').hide();
+                        $('#divCreateTemplateBtns').hide();
+                    } else {
+                        alert(data.Msg);
+                    }
+                }
+            });
+
+//            $('#formTemplate').ajaxSubmit({
+//                url: '../templateInfo/createSystemplate',
+//                type: 'post',
+//                dataType: 'json',
+//                success: function (data) {
+//                    if (data.status == "ok") {
+//                        $('.jsrz_main_check').html('您的申请已提交，我们将会在1-2个工作日内进行审核，请耐心等待!');
+//                        $('#baseTemplateManageContnent').load('sysManage/manageListContent.html');
+//                        $('#olPathInfo').hide();
+//                        $('#liPathTemplateCreate').hide();
+//                        $('#divCreateTemplateBtns').hide();
+//                    } else {
+//                        alert(data.Msg);
+//                    }
+//                },
+//                clearForm: true,//禁止清楚表单
+//                resetForm: true //禁止重置表单
+//            });
+        });
+
+        $('#cancel').click(function () {
+            $('#baseTemplateManageContnent').load('sysManage/manageListContent.html');
+            $('#olPathInfo').hide();
+            $('#liPathTemplateCreate').hide();
+            $('#divCreateTemplateBtns').hide();
+        });
+    }
+
+
+</script>
