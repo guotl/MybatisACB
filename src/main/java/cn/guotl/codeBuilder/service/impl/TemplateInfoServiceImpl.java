@@ -130,5 +130,10 @@ public class TemplateInfoServiceImpl implements TemplateInfoService {
         return entity;
     }
 
+    @Override
+    public TemplateInfo queryById(String id) {
+        return this.templateInfoDao.queryById(id);
+    }
+
 
 }

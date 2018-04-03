@@ -21,4 +21,6 @@ public interface TemplateInfoDao {
 
     public void create(TemplateInfo entity);
 
+    public TemplateInfo queryById(String id);
+
 }

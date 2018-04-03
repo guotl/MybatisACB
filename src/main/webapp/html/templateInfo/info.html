@@ -1,0 +1,64 @@
+<link href="../common/summernote/summernote.css" rel="stylesheet">
+
+<div id="divOnlineEdit" class="row" >
+    <div class="col-md-12" >
+        <div class="row">
+            <div class="col-md-10">
+                <h5>模板内容</h5>
+            </div>
+            <div class="col-md-2">
+                <button id="btn_backToList" type="button" class="btn btn-default " >
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 返回
+                </button>
+            </div>
+        </div>
+        <div id="editor" >
+
+        </div>
+    </div>
+</div>
+
+<script src="../common/summernote/summernote.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        $("#editor").summernote({
+            height: 400,
+            placeholder: '在此编辑模板内容...',
+            callbacks: {
+                onInit: function() {//加载之后，手动进入编码模式
+                    $(".btn-codeview").click();
+                    $('div .note-toolbar-wrapper').hide();
+                }
+            }
+        });
+        $("#editor").summernote('code','');
+
+//        $("#editor").summernote('code'); //读取内容
+//        $("#editor").summernote('code','1 \r\b\b\b1 \n1 \t2 ');//加载内容
+
+
+        $.ajax({
+            url:'../templateInfo/queryById/content_str',
+            type:'get',
+            dataType:'json',
+            data:{
+                id:localStorage.id
+            },
+            success:function (data) {
+                $("#editor").summernote('code',data.content_str);
+                $('div .note-codable').attr('disabled','disabled');
+            }
+        });
+
+        $('#btn_backToList').click(function () {
+            $('#baseTemplateManageContnent').load('sysManage/manageListContent.html');
+            $('#olPathInfo').hide();
+            $('#liPathTemplateDetail').hide();
+        });
+
+    });
+
+
+
+</script>

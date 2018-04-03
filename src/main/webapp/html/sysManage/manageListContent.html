@@ -109,7 +109,7 @@
                     valign: 'middle',
                     width: 160, // 定义列的宽度，单位为像素px
                     formatter: function (value, row, index) {
-                        return '<button class="btn btn-primary btn-sm" onclick="del(\'' + row.stdId + '\')">删除</button>';
+                        return '<button class="btn btn-primary btn-sm" onclick="detail(\'' + row.id + '\')">详情</button>';
                     }
                 }
             ],
@@ -119,8 +119,14 @@
             onLoadError: function () {  //加载失败时执行
                 console.info("加载数据失败");
             }
-
         });
+    }
+
+    function detail(id) {
+        localStorage.id = id;
+        $('#baseTemplateManageContnent').load('templateInfo/info.html');
+        $('#olPathInfo').show();
+        $('#liPathTemplateDetail').show();
     }
 
     function showTemplateCreationWindow() {

@@ -22,4 +22,6 @@ public interface TemplateInfoService {
 
     public TemplateInfo create(TemplateInfoVo templateInfoVo);
 
+    public TemplateInfo queryById(String id);
+
 }
